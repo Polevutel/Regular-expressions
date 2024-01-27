@@ -7,11 +7,10 @@ def format_phone_number(phone_number):
 def merge_duplicate_contacts(contacts_list):
     merged_contacts = {}
     for contact in contacts_list:
-        key = (contact[0], contact[1], contact[3])
+        key = (contact[0], contact[1], contact[2])
         if key in merged_contacts:
-            # merge the contact details
             merged_contact = merged_contacts[key]
-            for i in range(5, len(contact)):
+            for i in range(3, len(contact)):
                 if not merged_contact[i] and contact[i]:
                     merged_contact[i] = contact[i]
         else:
@@ -24,7 +23,6 @@ with open("phonebook_raw.csv", encoding="utf-8") as f:
     # Removing header from the list
     header = contacts_list.pop(0)
 
-# Split full names and format phone numbers
 for contact in contacts_list:
     full_name = contact[0].split()
     if len(full_name) < 2:
@@ -38,7 +36,6 @@ for contact in contacts_list:
     contact[5] = format_phone_number(contact[5])
     del contact[6:]  # Remove extra data if present
 
-# Merge duplicate contacts
 contacts_list = merge_duplicate_contacts(contacts_list)
 
 with open("phonebook.csv", "w", encoding="utf-8", newline='') as f:
