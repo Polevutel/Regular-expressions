@@ -20,7 +20,6 @@ def merge_duplicate_contacts(contacts_list):
 with open("phonebook_raw.csv", encoding="utf-8") as f:
     rows = csv.reader(f, delimiter=",")
     contacts_list = list(rows)
-    # Removing header from the list
     header = contacts_list.pop(0)
 
 for contact in contacts_list:
@@ -34,7 +33,7 @@ for contact in contacts_list:
     contact.insert(0, first_name)
     contact.insert(2, middle_name)
     contact[5] = format_phone_number(contact[5])
-    del contact[6:]  # Remove extra data if present
+    del contact[6:]
 
 contacts_list = merge_duplicate_contacts(contacts_list)
 
